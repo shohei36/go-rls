@@ -9,7 +9,7 @@ import (
 
 func main() {
 	db, err := NewTenantDB(
-		TenantDBInput{
+		TenantDBConfig{
 			Host:       getEnv("DB_HOST", "localhost"),
 			Port:       getEnv("DB_PORT", "5432"),
 			User:       getEnv("DB_USER", "tenant"),

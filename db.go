@@ -12,7 +12,7 @@ type TenantDB interface {
 	Conn(ctx context.Context, tenantID string) (*sql.Conn, error)
 }
 
-type TenantDBInput struct {
+type TenantDBConfig struct {
 	Host       string
 	Port       string
 	User       string
@@ -21,9 +21,9 @@ type TenantDBInput struct {
 	SchemaName string
 }
 
-func NewTenantDB(i TenantDBInput) (TenantDB, error) {
+func NewTenantDB(cfg TenantDBConfig) (TenantDB, error) {
 	db, err := openDB(
-		i.Host, i.Port, i.User, i.Password, i.DBName, i.SchemaName,
+		cfg.Host, cfg.Port, cfg.User, cfg.Password, cfg.DBName, cfg.SchemaName,
 	)
 	if err != nil {
 		return nil, err
