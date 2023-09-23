@@ -51,3 +51,15 @@ func (t *transaction) DoInTx(
 	}
 	return v, nil
 }
+
+func GetTx(ctx context.Context) (DBTX, bool) {
+	tx, ok := ctx.Value(ctxTxKey{}).(*sql.Tx)
+	return tx, ok
+}
+
+type DBTX interface {
+	ExecContext(context.Context, string, ...any) (sql.Result, error)
+	PrepareContext(context.Context, string) (*sql.Stmt, error)
+	QueryContext(context.Context, string, ...any) (*sql.Rows, error)
+	QueryRowContext(context.Context, string, ...any) *sql.Row
+}

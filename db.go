@@ -23,7 +23,7 @@ type TenantDBInput struct {
 
 func NewTenantDB(i TenantDBInput) (TenantDB, error) {
 	db, err := openDB(
-		i.DBName, i.Port, i.User, i.Password, i.DBName, i.SchemaName,
+		i.Host, i.Port, i.User, i.Password, i.DBName, i.SchemaName,
 	)
 	if err != nil {
 		return nil, err
